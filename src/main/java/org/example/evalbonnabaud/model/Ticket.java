@@ -30,11 +30,11 @@ public class Ticket {
 
     @Column(nullable = false)
     @NotBlank(groups = {Ticket.add.class,  Ticket.update.class})
-    protected String decription;
+    protected String description;
 
 
     @Column(nullable = false)
-    @NotBlank(groups = {Utilisateur.add.class})
+    @NotBlank(groups = {Utilisateur.add.class, Ticket.update.class})
     protected boolean resolu;
 
 }
