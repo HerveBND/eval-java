@@ -1,21 +1,18 @@
 package org.example.evalbonnabaud.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Utilisateur {
+public class Ticket {
 
     public interface add {
     }
@@ -28,15 +25,16 @@ public class Utilisateur {
     protected Integer id;
 
     @Column(nullable = false, unique = true)
-    @NotBlank(groups = {add.class, update.class})
-    protected String pseudo;
+    @NotBlank(groups = {Ticket.add.class, Ticket.update.class})
+    protected String titre;
 
     @Column(nullable = false)
-    @NotBlank(groups = {add.class})
-    protected String password;
+    @NotBlank(groups = {Ticket.add.class,  Ticket.update.class})
+    protected String decription;
 
 
     @Column(nullable = false)
-    @NotBlank(groups = {add.class})
-    protected boolean admin;
+    @NotBlank(groups = {Utilisateur.add.class})
+    protected boolean resolu;
+
 }
