@@ -16,8 +16,8 @@ VALUES
     (2, 'FEATURE'),
     (3, 'IMPROVEMENT');
 
-INSERT INTO ticket (id, titre, description, resolu, categorie_id, priorite_id)
+INSERT INTO ticket (id, titre, description, resolu, categorie_id, priorite_id, resolveur_id, soumissionneur_id)
 VALUES
-    (1, 'CICD', 'Improve CICD Workflow', 0 ,  1, 1),
-    (2, 'BUG', 'Fix Bug ultra galère', 0, 2, 2),
-    (3, 'IMPROVEMENT', 'Improve Performance', 1, 3, 3);
+    (1, 'CICD', 'Improve CICD Workflow', 0 ,  1, 1, NULL, 1),
+    (2, 'BUG', 'Fix Bug ultra galère', 0, 2, 2, 2, 2),
+    (3, 'IMPROVEMENT', 'Improve Performance', 1, 3, 3, NULL, NULL);

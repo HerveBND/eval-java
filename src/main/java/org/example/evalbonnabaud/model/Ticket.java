@@ -47,4 +47,11 @@ public class Ticket {
     @JsonView(TicketView.class)
     protected Priorite priorite;
 
+    @ManyToOne
+    @JsonView(TicketView.class)
+    protected Utilisateur resolveur;
+
+    @ManyToOne
+    @JsonView(TicketView.class)
+    protected Utilisateur soumissionneur;
 }
