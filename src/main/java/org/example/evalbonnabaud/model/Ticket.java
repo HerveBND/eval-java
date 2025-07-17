@@ -1,11 +1,13 @@
 package org.example.evalbonnabaud.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.evalbonnabaud.view.TicketView;
 
 @Getter
 @Setter
@@ -36,5 +38,13 @@ public class Ticket {
     @Column(nullable = false)
     @NotBlank(groups = {Utilisateur.add.class, Ticket.update.class})
     protected boolean resolu;
+
+    @ManyToOne(optional = true)
+    @JsonView(TicketView.class)
+    protected Categorie categorie;
+
+    @ManyToOne(optional = false)
+    @JsonView(TicketView.class)
+    protected Priorite priorite;
 
 }
