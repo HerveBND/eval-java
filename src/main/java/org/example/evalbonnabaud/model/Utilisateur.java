@@ -37,6 +37,6 @@ public class Utilisateur {
 
 
     @Column(nullable = false)
-    @NotBlank(groups = {add.class})
+    @NotNull(groups = {add.class})
     protected boolean admin;
 }

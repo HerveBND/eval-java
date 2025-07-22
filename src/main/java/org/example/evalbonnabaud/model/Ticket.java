@@ -3,15 +3,16 @@ package org.example.evalbonnabaud.model;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.evalbonnabaud.view.TicketView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Ticket {
@@ -20,6 +21,15 @@ public class Ticket {
     }
 
     public interface update {
+    }
+
+    public Ticket(String titre, String description, Categorie categorie,
+                  Priorite priorite) {
+        this.titre = titre;
+        this.description = description;
+        this.categories = categories;
+        this.priorite = priorite;
+        this.soumissionneur = soumissionneur;
     }
 
     @Id
@@ -36,12 +46,15 @@ public class Ticket {
 
 
     @Column(nullable = false)
-    @NotBlank(groups = {Utilisateur.add.class, Ticket.update.class})
-    protected boolean resolu;
+    protected boolean resolu = false;
 
-    @ManyToOne(optional = true)
+    @ManyToMany
     @JsonView(TicketView.class)
-    protected Categorie categorie;
+    @JoinTable(
+            name = "ticket_categories",
+            joinColumns = @JoinColumn(name = "ticket_id"),
+            inverseJoinColumns = @JoinColumn(name = "categorie_id"))
+    protected List<Categorie> categories = new ArrayList<>();
 
     @ManyToOne(optional = false)
     @JsonView(TicketView.class)
