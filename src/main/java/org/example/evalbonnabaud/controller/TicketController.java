@@ -88,4 +88,9 @@ public class TicketController {
 
     }
 
+    @GetMapping("/non-resolus")
+    @JsonView(TicketView.class)
+    public List<Ticket> getNonResolus() {
+        return ticketDao.findByResoluFalse();
+    }
 }
