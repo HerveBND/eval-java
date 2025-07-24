@@ -6,10 +6,12 @@ import org.example.evalbonnabaud.dao.TicketDao;
 import org.example.evalbonnabaud.model.Ticket;
 import org.example.evalbonnabaud.security.AppUserDetails;
 import org.example.evalbonnabaud.security.IsAdministrateur;
+import org.example.evalbonnabaud.security.IsUtilisateur;
 import org.example.evalbonnabaud.view.TicketView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +31,7 @@ public class TicketController {
 
     @GetMapping("/liste")
     @JsonView(TicketView.class)
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMINISTRATEUR')")
     public List<Ticket> getAll() {
         return ticketDao.findAll();
     }
@@ -44,6 +47,7 @@ public class TicketController {
 
     @PostMapping
     @JsonView(TicketView.class)
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMINISTRATEUR')")
     public ResponseEntity<Ticket> add(
             @RequestBody @Valid Ticket ticketEnvoye) {
 
@@ -53,9 +57,9 @@ public class TicketController {
 
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/resolve/{id}")
     @JsonView(TicketView.class)
-    @IsAdministrateur
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> resolve(
             @PathVariable int id,
             @RequestBody @Valid Ticket ticketEnvoye,
