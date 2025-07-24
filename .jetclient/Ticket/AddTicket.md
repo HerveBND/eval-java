@@ -1,7 +1,7 @@
 ```toml
 name = 'AddTicket'
 method = 'POST'
-url = 'http://localhost:8080/api/tickets '
+url = 'http://localhost:8080/api/tickets/add'
 sortWeight = 1000000
 id = 'fd87f0f4-4263-4d45-ac13-c9249e47bf85'
 
