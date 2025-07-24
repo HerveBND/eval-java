@@ -1,6 +1,7 @@
 package org.example.evalbonnabaud.mock;
 
 import org.example.evalbonnabaud.dao.TicketDao;
+import org.example.evalbonnabaud.model.Priorite;
 import org.example.evalbonnabaud.model.Ticket;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -16,7 +17,18 @@ public class TicketDaoMock implements TicketDao {
 
     @Override
     public List<Ticket> findByResoluFalse() {
-        return List.of();
+        Ticket ticket = new Ticket();
+        ticket.setId(1);
+        ticket.setTitre("CICD");
+        ticket.setDescription("Improve CICD Workflow");
+        ticket.setResolu(false);
+
+        Priorite priorite = new Priorite();
+        priorite.setId(1);
+        priorite.setNom("IMMEDIAT");
+        ticket.setPriorite(priorite);
+
+        return List.of(ticket);
     }
 
     @Override
@@ -101,7 +113,7 @@ public class TicketDaoMock implements TicketDao {
 
     @Override
     public <S extends Ticket> S save(S entity) {
-        return null;
+        return entity;
     }
 
     @Override
@@ -111,6 +123,21 @@ public class TicketDaoMock implements TicketDao {
 
     @Override
     public Optional<Ticket> findById(Integer integer) {
+        if (integer.equals(1)) {
+            Ticket ticket = new Ticket();
+            ticket.setId(1);
+            ticket.setTitre("CICD");
+            ticket.setDescription("Improve CICD Workflow");
+            ticket.setResolu(false);
+
+            // Créer et configurer la priorité
+            Priorite priorite = new Priorite();
+            priorite.setId(1);
+            priorite.setNom("IMMEDIAT");
+            ticket.setPriorite(priorite);
+
+            return Optional.of(ticket);
+        }
         return Optional.empty();
     }
 
